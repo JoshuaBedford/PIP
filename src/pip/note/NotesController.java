@@ -41,8 +41,6 @@ public class NotesController {
     private WebEngine webEngine;
     
     public NotesController(WebEngine engine){
-//        System.out.println(engine);
-        
         index(engine);
     }
     
@@ -147,9 +145,12 @@ public class NotesController {
         });
             }
         });
-    }
-    
-    
+    } 
+
+    /**
+     * Loads the index page for Notes, showing all notes.
+     * @param webEngine 
+     */
     private void index(WebEngine webEngine) {
         this.webEngine = webEngine;
         URL url = getClass().getResource("/pip/notes.html");
@@ -189,7 +190,20 @@ public class NotesController {
 
 
     }
+
+    /**
+     * Loads the index page for Notes, showing all notes.
+     * @param webEngine 
+     */
+    private void show(Notes note){
+        // this will display the selected note.
+    }
     
+    /**
+     * 
+     * Loads the create page for Notes, showing the note create form.
+     *
+     */
     private void create(){
         this.webEngine = webEngine;
         URL url = getClass().getResource("/pip/notes-create.html");
@@ -212,13 +226,43 @@ public class NotesController {
         
 //        this.listeners(webEngine);
     }
-    
-    
-    
+
+    /**
+     * Saves a given note to be serialized.
+     * @param note 
+     */
+    private void store(Notes note){
+        // this will store (create) the given note.
+    }
+
+    /**
+     * Shows the correct form to edit the specified note.
+     * @param webEngine 
+     */
+    private void edit(Notes note){
+        // show the form
+    }
+
+    /**
+     * Updates the specified note with changes.
+     * @param note
+     */
+    private void update(Notes note){
+        // this will update (edit) the given note.
+    }
+
+    /**
+     * Print data to console.
+     * @param data
+     */
     public void print(String data) {
         System.out.println(data);
     }
-    
+
+    /**
+     * Searches notes for given term and sets JS object in WebView with results.
+     * @param data
+     */
     public boolean search(String data) {
         
         DeSerializationClassName deserialize = new DeSerializationClassName();
@@ -228,13 +272,22 @@ public class NotesController {
         this.setMember("notes", notes.toArray());
         return true;
     }
-    
+
+    /**
+     * Sets a JS object in WebView.
+     * @param name
+     * @param notes
+     */
     private void setMember(String name, Object[] notes){
         JSObject windowObject = (JSObject) NotesController.this.webEngine.executeScript("window");
-//        System.out.println(contact.getName());
         windowObject.setMember(name, notes);
     }
-    
+
+    /**
+     * 
+     * Retrieves all notes and calls setMember to send to WebView
+     *
+     */
     public void getNotes(){
         DeSerializationClassName deserialize = new DeSerializationClassName();
         
