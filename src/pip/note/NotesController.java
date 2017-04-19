@@ -28,9 +28,9 @@ import org.w3c.dom.events.EventListener;
 import org.w3c.dom.events.EventTarget;
 import pip.DeSerializationClassName;
 import pip.contact.Contact;
-import pip.contact.ContactsView;
-import pip.course.ClassesView;
-import pip.event.EventsView;
+import pip.contact.ContactController;
+import pip.course.CourseController;
+import pip.event.EventController;
 
 /**
  *
@@ -53,6 +53,13 @@ public class NotesController {
 
                 Document doc = webEngine.getDocument();
                 
+                Element exit = doc.getElementById("exit-app");
+                Element notes = doc.getElementById("view-notes");
+                Element create = doc.getElementById("new-note");
+                Element contacts = doc.getElementById("view-contacts");
+                Element classes = doc.getElementById("view-courses");
+                Element events = doc.getElementById("view-events");
+                
                 EventListener exitApp;
                 exitApp = new EventListener() {
                     public void handleEvent(Event ev) {
@@ -63,16 +70,7 @@ public class NotesController {
                 EventListener viewNotes;
                 viewNotes = new EventListener() {
                     public void handleEvent(Event ev) {
-                        NotesController view = new NotesController(webEngine);
-//                        Platform.exit();
-                    }
-                };
-
-                EventListener newNote;
-                newNote = new EventListener() {
-                    public void handleEvent(Event ev) {
-//                        NotesController view = new NotesController(webEngine);
-                        NotesController.this.create();
+                        NotesController controller = new NotesController(webEngine);
 //                        Platform.exit();
                     }
                 };
@@ -80,21 +78,21 @@ public class NotesController {
                 EventListener viewContacts;
                 viewContacts = new EventListener() {
                     public void handleEvent(Event ev) {
-                        ContactsView view = new ContactsView(webEngine);
+                        ContactController controller = new ContactController(webEngine);
                     }
                 };
 
-                EventListener viewClasses;
-                viewClasses = new EventListener() {
+                EventListener viewCourses;
+                viewCourses = new EventListener() {
                     public void handleEvent(Event ev) {
-                        ClassesView view = new ClassesView(webEngine);
+                        CourseController controller = new CourseController(webEngine);
                     }
                 };
 
                 EventListener viewEvents;
                 viewEvents = new EventListener() {
                     public void handleEvent(Event ev) {
-                        EventsView view = new EventsView(webEngine);
+                        EventController controller = new EventController(webEngine);
                     }
                 };
 
@@ -112,23 +110,27 @@ public class NotesController {
 //                };
                 
                 
-                Element exit = doc.getElementById("exit-app");
-                ((EventTarget) exit).addEventListener("click", exitApp, false);
                 
-                Element notes = doc.getElementById("view-notes");
-                ((EventTarget) notes).addEventListener("click", viewNotes, false);
                 
-                Element create = doc.getElementById("new-note");
-                ((EventTarget) create).addEventListener("click", newNote, false);
+                        if(((EventTarget) exit) != null){
+                            ((EventTarget) exit).addEventListener("click", exitApp, false);
+                        }
                 
-                Element contacts = doc.getElementById("view-contacts");
-                ((EventTarget) contacts).addEventListener("click", viewContacts, false);
+                        if(((EventTarget) notes) != null){
+                            ((EventTarget) notes).addEventListener("click", viewNotes, false);
+                        }
                 
-                Element classes = doc.getElementById("view-classes");
-                ((EventTarget) classes).addEventListener("click", viewClasses, false);
+                        if(((EventTarget) contacts) != null){
+                            ((EventTarget) contacts).addEventListener("click", viewContacts, false);
+                        }
                 
-                Element events = doc.getElementById("view-events");
-                ((EventTarget) events).addEventListener("click", viewEvents, false);
+                        if(((EventTarget) classes) != null){
+                            ((EventTarget) classes).addEventListener("click", viewCourses, false);
+                        }
+                
+                        if(((EventTarget) events) != null){
+                            ((EventTarget) events).addEventListener("click", viewEvents, false);
+                        }
                 
                 
                 
@@ -148,7 +150,7 @@ public class NotesController {
     }
     
     
-        private void index(WebEngine webEngine) {
+    private void index(WebEngine webEngine) {
         this.webEngine = webEngine;
         URL url = getClass().getResource("/pip/notes.html");
         this.webEngine.load(url.toExternalForm());
@@ -159,17 +161,33 @@ public class NotesController {
                 public void changed(ObservableValue<? extends Worker.State> observable, Worker.State oldValue, Worker.State newValue) {
                     if (newValue == Worker.State.SUCCEEDED) {
                         JSObject windowObject = (JSObject) NotesController.this.webEngine.executeScript("window");
-        //                windowObject.setMember("Debug", debug); // insert object
 
                         windowObject.setMember("NotesController", NotesController.this);
+                        
+                        Document doc = webEngine.getDocument();
+                        Element create = doc.getElementById("new-note");
+                        EventListener newNote;
+                        newNote = new EventListener() {
+                            public void handleEvent(Event ev) {
+        //                        NotesController controller = new NotesController(webEngine);
+                                NotesController.this.create();
+        //                        Platform.exit();
+                            }
+                        };
+                        if(((EventTarget) create) != null){
+                            ((EventTarget) create).addEventListener("click", newNote, false);
+                        }
+
+                        NotesController.this.addListeners(webEngine);
+                        
                         windowObject.call("ready"); // execute callback
                     }
                 }
             }
         );
         
-        
-        this.addListeners(webEngine);
+
+
     }
     
     private void create(){

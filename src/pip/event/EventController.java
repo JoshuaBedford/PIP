@@ -20,17 +20,17 @@ import org.w3c.dom.Element;
 import org.w3c.dom.events.Event;
 import org.w3c.dom.events.EventListener;
 import org.w3c.dom.events.EventTarget;
-import pip.contact.ContactsView;
-import pip.course.ClassesView;
-import pip.note.NotesView;
+import pip.contact.ContactController;
+import pip.course.CourseController;
+import pip.note.NotesController;
 
 /**
  *
  * @author joshua
  */
-public class EventsView {
+public class EventController {
     
-    public EventsView(WebEngine engine){
+    public EventController(WebEngine engine){
 //        System.out.println(engine);
         execute(engine);
     }
@@ -50,7 +50,7 @@ public class EventsView {
                 EventListener viewNotes;
                 viewNotes = new EventListener() {
                     public void handleEvent(Event ev) {
-                        NotesView view = new NotesView(webEngine);
+                        NotesController controller = new NotesController(webEngine);
 //                        Platform.exit();
                     }
                 };
@@ -58,21 +58,21 @@ public class EventsView {
                 EventListener viewContacts;
                 viewContacts = new EventListener() {
                     public void handleEvent(Event ev) {
-                        ContactsView view = new ContactsView(webEngine);
+                        ContactController controller = new ContactController(webEngine);
                     }
                 };
 
                 EventListener viewClasses;
                 viewClasses = new EventListener() {
                     public void handleEvent(Event ev) {
-                        ClassesView view = new ClassesView(webEngine);
+                        CourseController controller = new CourseController(webEngine);
                     }
                 };
 
                 EventListener viewEvents;
                 viewEvents = new EventListener() {
                     public void handleEvent(Event ev) {
-                        EventsView view = new EventsView(webEngine);
+                        EventController controller = new EventController(webEngine);
                     }
                 };
                 
@@ -87,7 +87,7 @@ public class EventsView {
                 Element contacts = doc.getElementById("view-contacts");
                 ((EventTarget) contacts).addEventListener("click", viewContacts, false);
                 
-                Element classes = doc.getElementById("view-classes");
+                Element classes = doc.getElementById("view-courses");
                 ((EventTarget) classes).addEventListener("click", viewClasses, false);
                 
                 Element events = doc.getElementById("view-events");

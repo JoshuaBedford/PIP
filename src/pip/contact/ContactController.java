@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pip.course;
+package pip.contact;
 
 import java.net.URL;
 import javafx.application.Application;
@@ -20,17 +20,18 @@ import org.w3c.dom.Element;
 import org.w3c.dom.events.Event;
 import org.w3c.dom.events.EventListener;
 import org.w3c.dom.events.EventTarget;
-import pip.contact.ContactsView;
-import pip.event.EventsView;
-import pip.note.NotesView;
+import pip.contact.ContactController;
+import pip.course.CourseController;
+import pip.event.EventController;
+import pip.note.NotesController;
 
 /**
  *
  * @author joshua
  */
-public class ClassesView {
+public class ContactController {
     
-    public ClassesView(WebEngine engine){
+    public ContactController(WebEngine engine){
 //        System.out.println(engine);
         execute(engine);
     }
@@ -50,7 +51,7 @@ public class ClassesView {
                 EventListener viewNotes;
                 viewNotes = new EventListener() {
                     public void handleEvent(Event ev) {
-                        NotesView view = new NotesView(webEngine);
+                        NotesController controller = new NotesController(webEngine);
 //                        Platform.exit();
                     }
                 };
@@ -58,21 +59,21 @@ public class ClassesView {
                 EventListener viewContacts;
                 viewContacts = new EventListener() {
                     public void handleEvent(Event ev) {
-                        ContactsView view = new ContactsView(webEngine);
+                        ContactController controller = new ContactController(webEngine);
                     }
                 };
 
                 EventListener viewClasses;
                 viewClasses = new EventListener() {
                     public void handleEvent(Event ev) {
-                        ClassesView view = new ClassesView(webEngine);
+                        CourseController controller = new CourseController(webEngine);
                     }
                 };
 
                 EventListener viewEvents;
                 viewEvents = new EventListener() {
                     public void handleEvent(Event ev) {
-                        EventsView view = new EventsView(webEngine);
+                        EventController controller = new EventController(webEngine);
                     }
                 };
                 
@@ -87,7 +88,7 @@ public class ClassesView {
                 Element contacts = doc.getElementById("view-contacts");
                 ((EventTarget) contacts).addEventListener("click", viewContacts, false);
                 
-                Element classes = doc.getElementById("view-classes");
+                Element classes = doc.getElementById("view-courses");
                 ((EventTarget) classes).addEventListener("click", viewClasses, false);
                 
                 Element events = doc.getElementById("view-events");
@@ -101,7 +102,7 @@ public class ClassesView {
 //    }
 
     private void execute(WebEngine webEngine) {
-        URL url = getClass().getResource("/pip/classes.html");
+        URL url = getClass().getResource("/pip/contacts.html");
         webEngine.load(url.toExternalForm());
         
         this.listeners(webEngine);

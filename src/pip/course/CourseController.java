@@ -3,62 +3,42 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package pip;
+package pip.course;
 
-import pip.note.NotesController;
-import pip.contact.Contact;
 import java.net.URL;
 import javafx.application.Application;
+import static javafx.application.Application.launch;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.concurrent.Worker.State;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import javafx.concurrent.Worker;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import netscape.javascript.JSObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.events.Event;
 import org.w3c.dom.events.EventListener;
 import org.w3c.dom.events.EventTarget;
-import static pip.CreateFile.ClearContactFile;
 import pip.contact.ContactController;
-import pip.course.CourseController;
 import pip.event.EventController;
-import pip.note.Notes;
-
+import pip.note.NotesController;
 
 /**
  *
- * @author joshuabedford
+ * @author joshua
  */
-public class PIP extends Application {
-  
-    @Override
-    public void start(Stage primaryStage) {
-        StackPane root = new StackPane();
-        WebView webView = new WebView();
-        WebEngine webEngine = webView.getEngine();
-        URL url = getClass().getResource("index.html");
-        
-        webEngine.load(url.toExternalForm());
-        
-        root.getChildren().add(webView);
-        Scene scene = new Scene(root);
-        primaryStage.setTitle("PIP | Personal Information Package");
-        primaryStage.setWidth(1024);
-        primaryStage.setHeight(768);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+public class CourseController {
+    
+    public CourseController(WebEngine engine){
+//        System.out.println(engine);
+        execute(engine);
+    }
+    
+    public void listeners(WebEngine webEngine) {
         
         webEngine.getLoadWorker().stateProperty().addListener((observable, oldState, newState) -> {
-            if (newState == State.SUCCEEDED) {
+            if (newState == Worker.State.SUCCEEDED) {
 
                 EventListener exitApp;
                 exitApp = new EventListener() {
@@ -70,7 +50,7 @@ public class PIP extends Application {
                 EventListener viewNotes;
                 viewNotes = new EventListener() {
                     public void handleEvent(Event ev) {
-                        NotesController view = new NotesController(webEngine);
+                        NotesController controller = new NotesController(webEngine);
 //                        Platform.exit();
                     }
                 };
@@ -92,7 +72,7 @@ public class PIP extends Application {
                 EventListener viewEvents;
                 viewEvents = new EventListener() {
                     public void handleEvent(Event ev) {
-                        EventController view = new EventController(webEngine);
+                        EventController controller = new EventController(webEngine);
                     }
                 };
                 
@@ -115,23 +95,16 @@ public class PIP extends Application {
             }
         });
     }
+    
+//    public static void main(String[] args){
+//        launch(args);
+//    }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // Initialize project
-        launch(args);
-//        CreateFile init = new CreateFile();
-
-//        Contact contact = new Contact();
-//        contact.fillWithConsole();
-
-//        DeSerializationClassName deserialize = new DeSerializationClassName();
-//        Notes note = new Notes();
-//        note.fillWithConsole();
-//        
-//        deserialize.SearchNotes("History");
+    private void execute(WebEngine webEngine) {
+        URL url = getClass().getResource("/pip/courses.html");
+        webEngine.load(url.toExternalForm());
+        
+        this.listeners(webEngine);
     }
-  
+    
 }

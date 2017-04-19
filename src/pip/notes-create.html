@@ -82,16 +82,16 @@
         <ul>
           <li class="link is-active"><a id="view-notes"><span class="icon"><i class="fa fa-sticky-note"></i></span> <span>My Notes</span></a></li>
           <li class="link"><a id="view-contacts"><span class="icon"><i class="fa fa-address-book"></i></span> <span>My Contacts</span></a></li>
-          <li class="link"><a id="view-classes"><span class="icon"><i class="fa fa-book"></i></span> <span>My Classes</span></a></li>
+          <li class="link"><a id="view-courses"><span class="icon"><i class="fa fa-book"></i></span> <span>My Classes</span></a></li>
           <li class="link"><a id="view-events"><span class="icon"><i class="fa fa-calendar"></i></span> <span>My Events</span></a></li>
         </ul>
       </div>
     </div>
 
-    <div class="box">
-       <!--Main container--> 
+<!--    <div class="box">
+       Main container 
       <nav class="level">
-         <!--Left side--> 
+         Left side 
         <div class="level-left">
           <div class="level-item">
             <p class="subtitle is-5">
@@ -100,25 +100,25 @@
           </div>
           <div class="level-item">
             <div class="control has-addons">
-<!--                <form action="post" id="search-notes-form">
+                <form action="post" id="search-notes-form">
                   <input class="input" type="text" id="notes-data" placeholder="Find a note" />
                   <button class="button" id="search-notes" onclick="searchNotes()" value="">
                     Search
                   </button>
-                </form>-->
+                </form>
             </div>
           </div>
         </div>
 
         <div class="level-right">
-<!--          <p class="level-item"><strong>All</strong></p>
+          <p class="level-item"><strong>All</strong></p>
           <p class="level-item"><a>Published</a></p>
           <p class="level-item"><a>Drafts</a></p>
-          <p class="level-item"><a>Deleted</a></p>-->
+          <p class="level-item"><a>Deleted</a></p>
           <p class="level-item"><a class="button is-success" id="new-note">New Note</a></p>
         </div>
       </nav>
-    </div>
+    </div>-->
 
     <div class="spacer"></div>
 
@@ -127,21 +127,26 @@
             <div class="field">
                 <label class="label">Title</label>
                 <p class="control">
-                    <input class="input" id="note-title" type="text" placeholder="Enter a title here...">
+                    <input class="input is-info" id="note-title" type="text" placeholder="Enter a title here..." autofocus>
                 </p>
             </div>
             <div class="field">
                 <label class="label">Content</label>
                 <p class="control">
-                    <input class="input" id="note-content" type="text" placeholder="enter Note content here...">
+                    <textarea class="textarea is-info" id="note-content" placeholder="Enter content here...">
+
+                    </textarea>
                 </p>
             </div>
             <div class="field">
-                <label class="label">Content</label>
-                <p class="control pull-right">
-                    <a class="">Save</a>
-                </p>
+                <div class="control">
+                    <button class="button is-primary">Create Note</button>
+                </div>
+<!--                <div class="control">
+                    <button class="button is-link">Cancel</button>
+                </div>-->
             </div>
+            
         </form>
     </div>
   </div>
