@@ -192,7 +192,7 @@ public class NotesController {
     }
 
     /**
-     * Loads the index page for Notes, showing all notes.
+     * Display the selected note
      * @param webEngine 
      */
     private void show(Notes note){
@@ -249,6 +249,14 @@ public class NotesController {
      */
     private void update(Notes note){
         // this will update (edit) the given note.
+    }
+
+    /**
+     * Deletes the given note.
+     * @param note
+     */
+    private void destroy(Notes note){
+        // this will destroy (delete) the given note.
     }
 
     /**
