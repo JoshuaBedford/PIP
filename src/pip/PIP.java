@@ -121,8 +121,8 @@ public class PIP extends Application {
      */
     public static void main(String[] args) {
         // Initialize project
+        CreateFile init = new CreateFile();
         launch(args);
-//        CreateFile init = new CreateFile();
 
 //        Contact contact = new Contact();
 //        contact.fillWithConsole();

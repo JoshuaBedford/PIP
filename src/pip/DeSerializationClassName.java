@@ -12,8 +12,9 @@ public class DeSerializationClassName implements Serializable{
 //      DisplayContacts();
 //    }
    
-    public static void DisplayContacts(){
+    public static ArrayList<Contact> DisplayContacts(){
         ArrayList<String> Contactarraylist= new ArrayList<String>();
+        ArrayList<Contact> results = new ArrayList<Contact>();
         try
         {
             FileInputStream fis = new FileInputStream("contact.ser");
@@ -22,16 +23,17 @@ public class DeSerializationClassName implements Serializable{
             ois.close();
             fis.close();
          }catch(IOException ioe){
-             ioe.printStackTrace();
-             return;
+            ioe.printStackTrace();
+            return null;
           }catch(ClassNotFoundException c){
-             System.out.println("Class not found");
-             c.printStackTrace();
-             return;
+            System.out.println("Class not found");
+            c.printStackTrace();
+            return null;
           }
         for(String eventname: Contactarraylist){
-            ReadFile.ReadContact(eventname);
+            results.add(ReadFile.ReadContact(eventname));
         }
+        return results;
    }
    public static ArrayList<Contact> SearchContacts(String name){
      ArrayList<String> Contactarraylist= new ArrayList<String>();

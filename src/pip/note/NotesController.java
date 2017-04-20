@@ -79,7 +79,7 @@ public class NotesController {
                 EventListener viewContacts;
                 viewContacts = new EventListener() {
                     public void handleEvent(Event ev) {
-                        ContactController controller = new ContactController(webEngine);
+                       
                     }
                 };
 
@@ -132,20 +132,6 @@ public class NotesController {
                         if(((EventTarget) events) != null){
                             ((EventTarget) events).addEventListener("click", viewEvents, false);
                         }
-                
-                
-                
-        //Listen for state change
-//        webEngine.getLoadWorker().stateProperty().addListener((ov, o, n) -> {
-//            if (Worker.State.SUCCEEDED == n) {
-//                webEngine.setOnStatusChanged(webEvent -> {
-//
-//                    //Call value change
-////                    onValueChange(webEvent.getData());
-//                    System.out.println(webEvent.getData());
-//                });
-//            }
-//        });
             }
         });
     } 
@@ -198,40 +184,27 @@ public class NotesController {
      * Display the selected note
      * @param webEngine 
      */
-    private void show() {
+    public void show(Notes note) {
         URL url = getClass().getResource("/pip/notes-show.html");
         this.webEngine.load(url.toExternalForm());
         
 
-//        this.webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
-//                @Override
-//                public void changed(ObservableValue<? extends Worker.State> observable, Worker.State oldValue, Worker.State newValue) {
-//                    if (newValue == Worker.State.SUCCEEDED) {
-//                        JSObject windowObject = (JSObject) NotesController.this.webEngine.executeScript("window");
-//
-//                        windowObject.setMember("NotesController", NotesController.this);
-//                        
-//                        Document doc = webEngine.getDocument();
-//                        Element create = doc.getElementById("new-note");
-//                        EventListener newNote;
-//                        newNote = new EventListener() {
-//                            public void handleEvent(Event ev) {
-//        //                        NotesController controller = new NotesController(webEngine);
-//                                NotesController.this.create();
-//        //                        Platform.exit();
-//                            }
-//                        };
-//                        if(((EventTarget) create) != null){
-//                            ((EventTarget) create).addEventListener("click", newNote, false);
-//                        }
-//
-//                        NotesController.this.addListeners(webEngine);
-//                        
-//                        windowObject.call("ready"); // execute callback
-//                    }
-//                }
-//            }
-//        );
+        this.webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
+                @Override
+                public void changed(ObservableValue<? extends Worker.State> observable, Worker.State oldValue, Worker.State newValue) {
+                    if (newValue == Worker.State.SUCCEEDED) {
+                        JSObject windowObject = (JSObject) NotesController.this.webEngine.executeScript("window");
+
+                        windowObject.setMember("NotesController", NotesController.this);
+                        
+                        windowObject.setMember("note", note);
+                        
+                        
+                        windowObject.call("ready"); // execute callback
+                    }
+                }
+            }
+        );
         
 
 

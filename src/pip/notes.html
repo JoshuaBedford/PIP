@@ -64,15 +64,15 @@
           <p class="tagline">The users profile bio would go here, of course. It could be two lines</p>
         </div>
         <div class="column is-2 followers has-text-centered">
-          <p class="stat-val">129</p>
+          <p class="stat-val" id="contacts-count"></p>
           <p class="stat-key">contacts</p>
         </div>
         <div class="column is-2 following has-text-centered">
-          <p class="stat-val">12</p>
+          <p class="stat-val" id="notes-count"></p>
           <p class="stat-key">Notes</p>
         </div>
         <div class="column is-2 likes has-text-centered">
-          <p class="stat-val">3</p>
+          <p class="stat-val" id="events-count"></p>
           <p class="stat-key">events</p>
         </div>
       </div>
@@ -95,7 +95,7 @@
         <div class="level-left">
           <div class="level-item">
             <p class="subtitle is-5">
-              <strong>123</strong> Notes
+              <strong id="notes-count"></strong> Notes
             </p>
           </div>
           <div class="level-item">
@@ -123,7 +123,7 @@
 
     <div class="spacer"></div>
 
-    <div class="columns" id="notes-section">
+    <div class="columns is-multiline" id="notes-section">
 
     </div>
   </div>
@@ -131,11 +131,11 @@
 <script>
   // callback that uses java objects
     window.ready = function() {
-      var notesSection = document.getElementById("notes-section");
+        var notesSection = document.getElementById("notes-section");
       
-      NotesController.getNotes();
+        NotesController.getNotes();
       
-      showNotes(notes);
+        showNotes(notes);
     }
     
     document.getElementById("search-notes").addEventListener("click", function(){
@@ -145,9 +145,13 @@
     });
             
     function showNotes(notes){
+      
         var notesSection = document.getElementById("notes-section");
         notesSection.innerHTML = ``;
+        var round = 1;
         notes.forEach(function(note){
+            var id = "note-" + round;
+            
             notesSection.innerHTML += `<div class="column is-3">
                 <div class="card">
                   <div class="card-image">
@@ -157,17 +161,26 @@
                   </div>
                   <div class="card-content">
                     <div class="content">
-                      <span class="tag is-dark">${note.getTitle()}</span>
-                      <strong class="timestamp">2 d</strong>
+                      <!--<span class="tag is-dark">${note.getTitle()}</span>-->
+                      <strong class="timestamp" style="font-size: .9em;">${note.getDateCreated()}</strong>
                     </div>
                   </div>
                   <footer class="card-footer">
-                    <a class="card-footer-item">Save</a>
-                    <a class="card-footer-item">Edit</a>
-                    <a class="card-footer-item">Delete</a>
+                    <a class="card-footer-item" id="${id}">View</a>
+                    <!--<a class="card-footer-item">Edit</a>-->
+                    <!--<a class="card-footer-item">Delete</a>-->
                   </footer>
                 </div>
                 </div>`;
+                
+            document.getElementById(id).addEventListener("click", function(){
+                <!--document.getElementById(id).innerHTML = "Test";-->
+                <!--NotesController.print("viewing");-->
+
+                NotesController.show(note);
+            });
+                
+            round++;
         });
     }
         </script>

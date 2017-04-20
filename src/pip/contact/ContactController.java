@@ -6,6 +6,7 @@
 package pip.contact;
 
 import java.net.URL;
+import java.util.ArrayList;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.application.Platform;
@@ -15,14 +16,17 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import netscape.javascript.JSObject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.events.Event;
 import org.w3c.dom.events.EventListener;
 import org.w3c.dom.events.EventTarget;
+import pip.DeSerializationClassName;
 import pip.contact.ContactController;
 import pip.course.CourseController;
 import pip.event.EventController;
+import pip.note.Notes;
 import pip.note.NotesController;
 
 /**
@@ -31,9 +35,12 @@ import pip.note.NotesController;
  */
 public class ContactController {
     
+    WebEngine webEngine;
+    
     public ContactController(WebEngine engine){
 //        System.out.println(engine);
-        execute(engine);
+        this.webEngine = engine;
+        index(engine);
     }
     
     public void listeners(WebEngine webEngine) {
@@ -101,11 +108,32 @@ public class ContactController {
 //        launch(args);
 //    }
 
-    private void execute(WebEngine webEngine) {
+    private void index(WebEngine webEngine) {
         URL url = getClass().getResource("/pip/contacts.html");
         webEngine.load(url.toExternalForm());
         
         this.listeners(webEngine);
+    }
+    
+    public void getContacts(){
+        DeSerializationClassName deserialize = new DeSerializationClassName();
+        
+        ArrayList<Contact> contacts;
+        contacts = deserialize.DisplayContacts();
+        if(!contacts.isEmpty()){
+            this.setMember("contacts", contacts.toArray());
+        }
+        return;
+    }
+
+    /**
+     * Sets a JS object in WebView.
+     * @param name
+     * @param notes
+     */
+    private void setMember(String name, Object[] notes){
+        JSObject windowObject = (JSObject) ContactController.this.webEngine.executeScript("window");
+        windowObject.setMember(name, notes);
     }
     
 }

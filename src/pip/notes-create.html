@@ -83,13 +83,13 @@
             <div class="field">
                 <label class="label">Title</label>
                 <p class="control">
-                    <input class="input is-info" id="note-title" type="text" placeholder="Enter a title here..." autofocus>
+                    <input class="input is-info" id="note-title" type="text" autofocus>
                 </p>
             </div>
             <div class="field">
                 <label class="label">Content</label>
                 <p class="control">
-                    <textarea class="textarea is-info" id="note-content" placeholder="Enter content here...">
+                    <textarea class="textarea is-info" id="note-content">
 
                     </textarea>
                 </p>
@@ -109,7 +109,7 @@
         var title = document.getElementById("note-title");
         var content = document.getElementById("note-content");
         
-        NotesController.print("clicked create...");
+        <!--NotesController.print("clicked create...");-->
         
         if(title.value < 1){
             NotesController.print("Title is required.");

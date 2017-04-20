@@ -59,7 +59,7 @@
         <div class="column is-4 name">
           <p>
             <span class="title is-bold">John Smith</span>
-            <span class="button is-primary is-outlined follow">Follow</span>
+            <!--<span class="button is-primary is-outlined follow">Follow</span>-->
           </p>
           <p class="tagline">The users profile bio would go here, of course. It could be two lines</p>
         </div>
@@ -95,14 +95,14 @@
         <div class="level-left">
           <div class="level-item">
             <p class="subtitle is-5">
-              <strong>67</strong> Contacts
+              <strong>12</strong> Contacts
             </p>
           </div>
           <div class="level-item">
             <div class="control has-addons">
-                <form action="post" id="search-contacts-form">
-                  <input class="input" type="text" placeholder="Find a Contact" />
-                  <button class="button" id="search-contacts">
+                <form action="post" id="search-notes-form">
+                  <input class="input" type="text" id="notes-data" placeholder="Find a note" autofocus />
+                  <button class="button" id="search-notes" onclick="searchNotes()" value="">
                     Search
                   </button>
                 </form>
@@ -112,413 +112,73 @@
 
          <!--Right side--> 
         <div class="level-right">
-          <p class="level-item"><strong>All</strong></p>
-          <p class="level-item"><a>Published</a></p>
-          <p class="level-item"><a>Drafts</a></p>
-          <p class="level-item"><a>Deleted</a></p>
-          <p class="level-item"><a class="button is-success">New Note</a></p>
+          <p class="level-item"><a class="button is-success" id="new-note">New Note</a></p>
         </div>
       </nav>
     </div>
 
     <div class="spacer"></div>
 
-    <div class="columns">
-      <div class="column is-3">
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="http://placehold.it/300x225?text=Contact+Name" alt="">
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="content">
-              <span class="tag is-dark">#webdev</span>
-              <strong class="timestamp">2 d</strong>
-            </div>
-          </div>
-          <footer class="card-footer">
-            <a class="card-footer-item">Save</a>
-            <a class="card-footer-item">Edit</a>
-            <a class="card-footer-item">Delete</a>
-          </footer>
-        </div>
-        <br>
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="http://placehold.it/300x225?text=Contact+Name" alt="">
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="content">
-              <span class="tag is-dark">#webdev</span>
-              <strong class="timestamp">2 d</strong>
-            </div>
-          </div>
-          <footer class="card-footer">
-            <a class="card-footer-item">Save</a>
-            <a class="card-footer-item">Edit</a>
-            <a class="card-footer-item">Delete</a>
-          </footer>
-        </div>
-        <br>
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="http://placehold.it/300x225?text=Contact+Name" alt="">
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="content">
-              <span class="tag is-dark">#webdev</span>
-              <strong class="timestamp">2 d</strong>
-            </div>
-          </div>
-          <footer class="card-footer">
-            <a class="card-footer-item">Save</a>
-            <a class="card-footer-item">Edit</a>
-            <a class="card-footer-item">Delete</a>
-          </footer>
-        </div>
-        <br>
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="http://placehold.it/300x225?text=Contact+Name" alt="">
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="content">
-              <span class="tag is-dark">#webdev</span>
-              <strong class="timestamp">2 d</strong>
-            </div>
-          </div>
-          <footer class="card-footer">
-            <a class="card-footer-item">Save</a>
-            <a class="card-footer-item">Edit</a>
-            <a class="card-footer-item">Delete</a>
-          </footer>
-        </div>
-        <br>
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="http://placehold.it/300x225?text=Contact+Name" alt="">
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="content">
-              <span class="tag is-dark">#webdev</span>
-              <strong class="timestamp">2 d</strong>
-            </div>
-          </div>
-          <footer class="card-footer">
-            <a class="card-footer-item">Save</a>
-            <a class="card-footer-item">Edit</a>
-            <a class="card-footer-item">Delete</a>
-          </footer>
-        </div>
-        <br>
-      </div>
-      <div class="column is-3">
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="http://placehold.it/300x225?text=Contact+Name" alt="">
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="content">
-              <span class="tag is-dark">#webdev</span>
-              <strong class="timestamp">2 d</strong>
-            </div>
-          </div>
-          <footer class="card-footer">
-            <a class="card-footer-item">Save</a>
-            <a class="card-footer-item">Edit</a>
-            <a class="card-footer-item">Delete</a>
-          </footer>
-        </div>
-        <br>
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="http://placehold.it/300x225?text=Contact+Name" alt="">
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="content">
-              <span class="tag is-dark">#webdev</span>
-              <strong class="timestamp">2 d</strong>
-            </div>
-          </div>
-          <footer class="card-footer">
-            <a class="card-footer-item">Save</a>
-            <a class="card-footer-item">Edit</a>
-            <a class="card-footer-item">Delete</a>
-          </footer>
-        </div>
-        <br>
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="http://placehold.it/300x225?text=Contact+Name" alt="">
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="content">
-              <span class="tag is-dark">#webdev</span>
-              <strong class="timestamp">2 d</strong>
-            </div>
-          </div>
-          <footer class="card-footer">
-            <a class="card-footer-item">Save</a>
-            <a class="card-footer-item">Edit</a>
-            <a class="card-footer-item">Delete</a>
-          </footer>
-        </div>
-        <br>
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="http://placehold.it/300x225?text=Contact+Name" alt="">
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="content">
-              <span class="tag is-dark">#webdev</span>
-              <strong class="timestamp">2 d</strong>
-            </div>
-          </div>
-          <footer class="card-footer">
-            <a class="card-footer-item">Save</a>
-            <a class="card-footer-item">Edit</a>
-            <a class="card-footer-item">Delete</a>
-          </footer>
-        </div>
-        <br>
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="http://placehold.it/300x225?text=Contact+Name" alt="">
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="content">
-              <span class="tag is-dark">#webdev</span>
-              <strong class="timestamp">2 d</strong>
-            </div>
-          </div>
-          <footer class="card-footer">
-            <a class="card-footer-item">Save</a>
-            <a class="card-footer-item">Edit</a>
-            <a class="card-footer-item">Delete</a>
-          </footer>
-        </div>
-        <br>
-      </div>
-      <div class="column is-3">
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="http://placehold.it/300x225?text=Contact+Name" alt="">
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="content">
-              <span class="tag is-dark">#webdev</span>
-              <strong class="timestamp">2 d</strong>
-            </div>
-          </div>
-          <footer class="card-footer">
-            <a class="card-footer-item">Save</a>
-            <a class="card-footer-item">Edit</a>
-            <a class="card-footer-item">Delete</a>
-          </footer>
-        </div>
-        <br>
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="http://placehold.it/300x225?text=Contact+Name" alt="">
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="content">
-              <span class="tag is-dark">#webdev</span>
-              <strong class="timestamp">2 d</strong>
-            </div>
-          </div>
-          <footer class="card-footer">
-            <a class="card-footer-item">Save</a>
-            <a class="card-footer-item">Edit</a>
-            <a class="card-footer-item">Delete</a>
-          </footer>
-        </div>
-        <br>
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="http://placehold.it/300x225?text=Contact+Name" alt="">
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="content">
-              <span class="tag is-dark">#webdev</span>
-              <strong class="timestamp">2 d</strong>
-            </div>
-          </div>
-          <footer class="card-footer">
-            <a class="card-footer-item">Save</a>
-            <a class="card-footer-item">Edit</a>
-            <a class="card-footer-item">Delete</a>
-          </footer>
-        </div>
-        <br>
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="http://placehold.it/300x225?text=Contact+Name" alt="">
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="content">
-              <span class="tag is-dark">#webdev</span>
-              <strong class="timestamp">2 d</strong>
-            </div>
-          </div>
-          <footer class="card-footer">
-            <a class="card-footer-item">Save</a>
-            <a class="card-footer-item">Edit</a>
-            <a class="card-footer-item">Delete</a>
-          </footer>
-        </div>
-        <br>
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="http://placehold.it/300x225?text=Contact+Name" alt="">
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="content">
-              <span class="tag is-dark">#webdev</span>
-              <strong class="timestamp">2 d</strong>
-            </div>
-          </div>
-          <footer class="card-footer">
-            <a class="card-footer-item">Save</a>
-            <a class="card-footer-item">Edit</a>
-            <a class="card-footer-item">Delete</a>
-          </footer>
-        </div>
-        <br>
-      </div>
-      <div class="column is-3">
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="http://placehold.it/300x225?text=Contact+Name" alt="">
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="content">
-              <span class="tag is-dark">#webdev</span>
-              <strong class="timestamp">2 d</strong>
-            </div>
-          </div>
-          <footer class="card-footer">
-            <a class="card-footer-item">Save</a>
-            <a class="card-footer-item">Edit</a>
-            <a class="card-footer-item">Delete</a>
-          </footer>
-        </div>
-        <br>
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="http://placehold.it/300x225?text=Contact+Name" alt="">
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="content">
-              <span class="tag is-dark">#webdev</span>
-              <strong class="timestamp">2 d</strong>
-            </div>
-          </div>
-          <footer class="card-footer">
-            <a class="card-footer-item">Save</a>
-            <a class="card-footer-item">Edit</a>
-            <a class="card-footer-item">Delete</a>
-          </footer>
-        </div>
-        <br>
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="http://placehold.it/300x225?text=Contact+Name" alt="">
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="content">
-              <span class="tag is-dark">#webdev</span>
-              <strong class="timestamp">2 d</strong>
-            </div>
-          </div>
-          <footer class="card-footer">
-            <a class="card-footer-item">Save</a>
-            <a class="card-footer-item">Edit</a>
-            <a class="card-footer-item">Delete</a>
-          </footer>
-        </div>
-        <br>
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="http://placehold.it/300x225?text=Contact+Name" alt="">
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="content">
-              <span class="tag is-dark">#webdev</span>
-              <strong class="timestamp">2 d</strong>
-            </div>
-          </div>
-          <footer class="card-footer">
-            <a class="card-footer-item">Save</a>
-            <a class="card-footer-item">Edit</a>
-            <a class="card-footer-item">Delete</a>
-          </footer>
-        </div>
-        <br>
-        <div class="card">
-          <div class="card-image">
-            <figure class="image is-4by3">
-              <img src="http://placehold.it/300x225?text=Contact+Name" alt="">
-            </figure>
-          </div>
-          <div class="card-content">
-            <div class="content">
-              <span class="tag is-dark">#webdev</span>
-              <strong class="timestamp">2 d</strong>
-            </div>
-          </div>
-          <footer class="card-footer">
-            <a class="card-footer-item">Save</a>
-            <a class="card-footer-item">Edit</a>
-            <a class="card-footer-item">Delete</a>
-          </footer>
-        </div>
-        <br>
-      </div>
+    <div class="columns is-multiline" id="contacts-section">
 
     </div>
   </div>
 
-    <script>
-        var obj = {one: '1', two: '2'};
-    </script>
+<script>
+  // callback that uses java objects
+    window.ready = function() {
+      var notesSection = document.getElementById("notes-section");
+      
+      ContactsController.getNotes();
+      
+      showNotes(notes);
+    }
+    
+    document.getElementById("search-notes").addEventListener("click", function(){
+        NotesController.search(document.getElementById("notes-data").value);
+
+        showNotes(notes);
+    });
+            
+    function showNotes(notes){
+        var notesSection = document.getElementById("notes-section");
+        notesSection.innerHTML = ``;
+        var round = 1;
+        notes.forEach(function(note){
+            var id = "note-" + round;
+            
+            notesSection.innerHTML += `<div class="column is-3">
+                <div class="card">
+                  <div class="card-image">
+                    <figure class="image is-4by3">
+                      <img src="http://placehold.it/300x225?text=${note.getTitle().replace(/\s+/g, '+')}" alt="">
+                    </figure>
+                  </div>
+                  <div class="card-content">
+                    <div class="content">
+                      <!--<span class="tag is-dark">${note.getTitle()}</span>-->
+                      <strong class="timestamp" style="font-size: .9em;">${note.getDateCreated()}</strong>
+                    </div>
+                  </div>
+                  <footer class="card-footer">
+                    <a class="card-footer-item" id="${id}">View</a>
+                    <!--<a class="card-footer-item">Edit</a>-->
+                    <!--<a class="card-footer-item">Delete</a>-->
+                  </footer>
+                </div>
+                </div>`;
+                
+            document.getElementById(id).addEventListener("click", function(){
+                <!--document.getElementById(id).innerHTML = "Test";-->
+                <!--NotesController.print("viewing");-->
+
+                NotesController.show(note);
+            });
+                
+            round++;
+        });
+    }
+        </script>
 
 </body>
 </html>
