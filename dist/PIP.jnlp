@@ -9,7 +9,7 @@
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
     <jar href="lib/PIP-Preloader.jar" size="2953" download="progress" />
-    <jar href="PIP.jar" size="73582" download="eager" />
+    <jar href="PIP.jar" size="75215" download="eager" />
   </resources>
   <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="PIP" >
     <param name="requiredFXVersion" value="8.0+"/>

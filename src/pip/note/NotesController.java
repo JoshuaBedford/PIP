@@ -8,6 +8,7 @@ package pip.note;
 import java.lang.reflect.Array;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.application.Platform;
@@ -26,7 +27,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.events.Event;
 import org.w3c.dom.events.EventListener;
 import org.w3c.dom.events.EventTarget;
+import pip.ArrayListSerializationName;
 import pip.DeSerializationClassName;
+import pip.WriteFile;
 import pip.contact.Contact;
 import pip.contact.ContactController;
 import pip.course.CourseController;
@@ -133,16 +136,16 @@ public class NotesController {
                 
                 
         //Listen for state change
-        webEngine.getLoadWorker().stateProperty().addListener((ov, o, n) -> {
-            if (Worker.State.SUCCEEDED == n) {
-                webEngine.setOnStatusChanged(webEvent -> {
-
-                    //Call value change
-//                    onValueChange(webEvent.getData());
-                    System.out.println(webEvent.getData());
-                });
-            }
-        });
+//        webEngine.getLoadWorker().stateProperty().addListener((ov, o, n) -> {
+//            if (Worker.State.SUCCEEDED == n) {
+//                webEngine.setOnStatusChanged(webEvent -> {
+//
+//                    //Call value change
+////                    onValueChange(webEvent.getData());
+//                    System.out.println(webEvent.getData());
+//                });
+//            }
+//        });
             }
         });
     } 
@@ -195,8 +198,43 @@ public class NotesController {
      * Display the selected note
      * @param webEngine 
      */
-    private void show(Notes note){
-        // this will display the selected note.
+    private void show() {
+        URL url = getClass().getResource("/pip/notes-show.html");
+        this.webEngine.load(url.toExternalForm());
+        
+
+//        this.webEngine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
+//                @Override
+//                public void changed(ObservableValue<? extends Worker.State> observable, Worker.State oldValue, Worker.State newValue) {
+//                    if (newValue == Worker.State.SUCCEEDED) {
+//                        JSObject windowObject = (JSObject) NotesController.this.webEngine.executeScript("window");
+//
+//                        windowObject.setMember("NotesController", NotesController.this);
+//                        
+//                        Document doc = webEngine.getDocument();
+//                        Element create = doc.getElementById("new-note");
+//                        EventListener newNote;
+//                        newNote = new EventListener() {
+//                            public void handleEvent(Event ev) {
+//        //                        NotesController controller = new NotesController(webEngine);
+//                                NotesController.this.create();
+//        //                        Platform.exit();
+//                            }
+//                        };
+//                        if(((EventTarget) create) != null){
+//                            ((EventTarget) create).addEventListener("click", newNote, false);
+//                        }
+//
+//                        NotesController.this.addListeners(webEngine);
+//                        
+//                        windowObject.call("ready"); // execute callback
+//                    }
+//                }
+//            }
+//        );
+        
+
+
     }
     
     /**
@@ -216,6 +254,23 @@ public class NotesController {
                     if (newValue == Worker.State.SUCCEEDED) {
                         JSObject windowObject = (JSObject) NotesController.this.webEngine.executeScript("window");
 
+//                        Document doc = webEngine.getDocument();
+//                        Element create = doc.getElementById("create-note");
+//
+//                        EventListener createNote;
+//                        createNote = new EventListener() {
+//                            public void handleEvent(Event ev) {
+//                                System.out.println(doc.getElementById("note-title").value);
+//                                System.out.println(doc.getElementById("note-content").value);
+//                                System.out.println("creating note....");
+////                                Platform.exit();
+//                            }
+//                        };
+//                        
+//                        if(((EventTarget) create) != null){
+//                            ((EventTarget) create).addEventListener("click", createNote, false);
+//                        }
+
                         windowObject.setMember("NotesController", NotesController.this);
                         windowObject.call("ready"); // execute callback
                     }
@@ -231,8 +286,17 @@ public class NotesController {
      * Saves a given note to be serialized.
      * @param note 
      */
-    private void store(Notes note){
+    public void store(String title, String content){
         // this will store (create) the given note.
+        Notes note = new Notes();
+        note.setTitle(title);
+        note.setContent(content);
+        note.setDateCreated(new Date());
+        
+        ArrayListSerializationName.AddNotes(note.getTitle()+"notes.ser");
+        WriteFile.writeNotes(note.getTitle(),note.getDateCreated(),note.getContent(),note.getID());
+        
+        this.index(webEngine);
     }
 
     /**

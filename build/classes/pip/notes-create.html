@@ -27,19 +27,7 @@
         <a class="nav-item is-tab is-active">
           Home
         </a>
-<!--        <a class="nav-item is-tab">
-          Features
-        </a>
-        <a class="nav-item is-tab">
-          Team
-        </a>
-        <a class="nav-item is-tab">
-          Help
-        </a>-->
         <span class="nav-item">
-<!--          <a class="button">
-            Log in
-          </a>-->
           <a class="button is-info" id="exit-app">
             Exit
           </a>
@@ -88,38 +76,6 @@
       </div>
     </div>
 
-<!--    <div class="box">
-       Main container 
-      <nav class="level">
-         Left side 
-        <div class="level-left">
-          <div class="level-item">
-            <p class="subtitle is-5">
-              <strong>123</strong> Notes
-            </p>
-          </div>
-          <div class="level-item">
-            <div class="control has-addons">
-                <form action="post" id="search-notes-form">
-                  <input class="input" type="text" id="notes-data" placeholder="Find a note" />
-                  <button class="button" id="search-notes" onclick="searchNotes()" value="">
-                    Search
-                  </button>
-                </form>
-            </div>
-          </div>
-        </div>
-
-        <div class="level-right">
-          <p class="level-item"><strong>All</strong></p>
-          <p class="level-item"><a>Published</a></p>
-          <p class="level-item"><a>Drafts</a></p>
-          <p class="level-item"><a>Deleted</a></p>
-          <p class="level-item"><a class="button is-success" id="new-note">New Note</a></p>
-        </div>
-      </nav>
-    </div>-->
-
     <div class="spacer"></div>
 
     <div class="box is-darker column is-6 is-offset-4">
@@ -140,65 +96,31 @@
             </div>
             <div class="field">
                 <div class="control">
-                    <button class="button is-primary">Create Note</button>
+                    <button class="button is-primary" id="create-note">Create Note</button>
                 </div>
-<!--                <div class="control">
-                    <button class="button is-link">Cancel</button>
-                </div>-->
             </div>
             
         </form>
     </div>
   </div>
-
-<!--<script>
-  // callback that uses java objects
-    window.ready = function() { 
-      NotesController.print("this sucks");
-      var notesSection = document.getElementById("notes-section");
-      
-      NotesController.getNotes();
-      
-      showNotes(notes);
-    }
-    
-    document.getElementById("search-notes").addEventListener("click", function(){
-        NotesController.search(document.getElementById("notes-data").value);
-
-        showNotes(notes);
+   
+<script>
+    document.getElementById("create-note").addEventListener("click", function(){
+        var title = document.getElementById("note-title");
+        var content = document.getElementById("note-content");
+        
+        NotesController.print("clicked create...");
+        
+        if(title.value < 1){
+            NotesController.print("Title is required.");
+        }
+        if(content.value < 1){
+            NotesController.print("Content is required.");
+        }
+        
+        NotesController.store(title.value, content.value);
     });
-            
-    function showNotes(notes){
-        var notesSection = document.getElementById("notes-section");
-        notesSection.innerHTML = ``;
-        notes.forEach(function(note){
-
-            note.setTitle(note.getTitle().replace(/\s+/g, '+'));
-            NotesController.print(note.getTitle());
-            
-            notesSection.innerHTML += `<div class="column is-3">
-                <div class="card">
-                  <div class="card-image">
-                    <figure class="image is-4by3">
-                      <img src="http://placehold.it/300x225?text=${note.getTitle().replace(/\s+/g, '+')}" alt="">
-                    </figure>
-                  </div>
-                  <div class="card-content">
-                    <div class="content">
-                      <span class="tag is-dark">${note.getTitle()}</span>
-                      <strong class="timestamp">2 d</strong>
-                    </div>
-                  </div>
-                  <footer class="card-footer">
-                    <a class="card-footer-item">Save</a>
-                    <a class="card-footer-item">Edit</a>
-                    <a class="card-footer-item">Delete</a>
-                  </footer>
-                </div>
-                </div>`;
-        });
-    }
-        </script>-->
+</script>
 
 </body>
 </html>

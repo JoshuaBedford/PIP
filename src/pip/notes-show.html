@@ -88,10 +88,10 @@
       </div>
     </div>
 
-    <div class="box">
-       <!--Main container--> 
+<!--    <div class="box">
+       Main container 
       <nav class="level">
-         <!--Left side--> 
+         Left side 
         <div class="level-left">
           <div class="level-item">
             <p class="subtitle is-5">
@@ -101,7 +101,7 @@
           <div class="level-item">
             <div class="control has-addons">
                 <form action="post" id="search-notes-form">
-                  <input class="input" type="text" id="notes-data" placeholder="Find a note" autofocus />
+                  <input class="input" type="text" id="notes-data" placeholder="Find a note" />
                   <button class="button" id="search-notes" onclick="searchNotes()" value="">
                     Search
                   </button>
@@ -110,27 +110,44 @@
           </div>
         </div>
 
-         <!--Right side--> 
         <div class="level-right">
-<!--          <p class="level-item"><strong>All</strong></p>
+          <p class="level-item"><strong>All</strong></p>
           <p class="level-item"><a>Published</a></p>
           <p class="level-item"><a>Drafts</a></p>
-          <p class="level-item"><a>Deleted</a></p>-->
+          <p class="level-item"><a>Deleted</a></p>
           <p class="level-item"><a class="button is-success" id="new-note">New Note</a></p>
         </div>
       </nav>
-    </div>
+    </div>-->
 
     <div class="spacer"></div>
 
-    <div class="columns" id="notes-section">
-
+    <div class="box is-darker column is-6 is-offset-4">
+        <article class="message">
+            <div class="message-header">
+              <p>Hello World</p>
+              <button class="delete"></button>
+            </div>
+            <div class="message-body">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum <a>felis venenatis</a> efficitur. Aenean ac <em>eleifend lacus</em>, in mollis lectus. Donec sodales, arcu et sollicitudin porttitor, tortor urna tempor ligula, id porttitor mi magna a neque. Donec dui urna, vehicula et sem eget, facilisis sodales sem.
+            </div>
+            </article>
+            <article class="message is-dark">
+            <div class="message-header">
+              <p>Dark</p>
+              <button class="delete"></button>
+            </div>
+            <div class="message-body">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus mi</strong>, tempus quis placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet fringilla. Nullam gravida purus diam, et dictum <a>felis venenatis</a> efficitur. Aenean ac <em>eleifend lacus</em>, in mollis lectus. Donec sodales, arcu et sollicitudin porttitor, tortor urna tempor ligula, id porttitor mi magna a neque. Donec dui urna, vehicula et sem eget, facilisis sodales sem.
+            </div>
+        </article>
     </div>
   </div>
 
-<script>
+<!--<script>
   // callback that uses java objects
-    window.ready = function() {
+    window.ready = function() { 
+      NotesController.print("this sucks");
       var notesSection = document.getElementById("notes-section");
       
       NotesController.getNotes();
@@ -138,16 +155,24 @@
       showNotes(notes);
     }
     
-    document.getElementById("search-notes").addEventListener("click", function(){
+    document.getElementById("create-note").addEventListener("click", function(){
         NotesController.search(document.getElementById("notes-data").value);
 
-        showNotes(notes);
+        showNote(note);
     });
-            
+</script>-->
+     
+     
+     <!--
+     <script>
     function showNotes(notes){
         var notesSection = document.getElementById("notes-section");
         notesSection.innerHTML = ``;
         notes.forEach(function(note){
+
+            note.setTitle(note.getTitle().replace(/\s+/g, '+'));
+            NotesController.print(note.getTitle());
+            
             notesSection.innerHTML += `<div class="column is-3">
                 <div class="card">
                   <div class="card-image">
@@ -170,7 +195,7 @@
                 </div>`;
         });
     }
-        </script>
+        </script>-->
 
 </body>
 </html>

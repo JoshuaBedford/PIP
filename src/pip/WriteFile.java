@@ -96,7 +96,7 @@ public class WriteFile {
    }
 
 
-    public static void writeNotes(String Title,Date DateCreated, String Content, int ID) {
+    public static void writeNotes(String Title, Date DateCreated, String Content, int ID) {
       Scanner console = new Scanner(System.in);
       Notes notes = new Notes();
       notes.setTitle(Title);
